@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Charset + viewport for responsive layout -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frontend Learning</title>
+
+  <!-- App stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!--
+    Notes:
+    - Keep HTML semantic and minimal; JS injects content into <main id="app">.
+    - Sidebar uses <aside> landmark; navigation uses <nav> for screen readers.
+    - Focus is moved to #app on route change for better a11y.
+  -->
+</head>
+
+<body>
+  <!-- App Shell -->
+  <aside class="sidebar" aria-label="Primary">
+    <a class="logo" href="#/">FE Learn</a>
+    <nav>
+      <a href="#/" data-link>Home</a>
+      <a href="#/learn" data-link>Learn</a>
+      <a href="#/challenges" data-link>Challenges</a>
+      <a href="#/quizzes" data-link>Quizzes</a>
+      <a href="#/projects" data-link>Projects</a>
+      <a href="#/glossary" data-link>Glossary</a>
+      <a href="#/progress" data-link>Progress</a>
+      <a href="#/settings" data-link>Settings</a>
+    </nav>
+    <button id="themeToggle" class="btn" aria-pressed="false">Toggle Theme</button>
+  </aside>
+
+  <!-- Dynamic view container -->
+  <main id="app" tabindex="-1" aria-live="polite"></main>
+
+  <!-- App script -->
+  <script src="app.js"></script>
+</body>
+
+</html>
