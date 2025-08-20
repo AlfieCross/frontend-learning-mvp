@@ -1,123 +1,234 @@
-:root{
-  /* Design tokens (dark theme default) */
-  --bg:#0f2135;
-  --surface:#142a44;
-  --text:#e6eef7;
-  --muted:#93a4b8;
-  --primary:#1c4067;
-  --accent:#4fd1c5;
+/* =========================
+   Design tokens & themes
+   ========================= */
+:root {
+  /* Dark theme (default) */
+  --bg: #0f2135;
+  --surface: #142a44;
+  --text: #e6eef7;
+  --muted: #93a4b8;
+  --primary: #1c4067;
+  --accent: #4fd1c5;
+
+  /* Layout scales */
+  --radius: 12px;
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+
+  color-scheme: dark light;
 }
-:root.light{
+
+:root.light {
   /* Light theme overrides */
-  --bg:#f7fbff;
-  --surface:#ffffff;
-  --text:#0b1623;
-  --muted:#5e7186;
-  --primary:#1c4067;
-  --accent:#00ffbb;
+  --bg: #f7fbff;
+  --surface: #ffffff;
+  --text: #0b1623;
+  --muted: #5e7186;
+  --primary: #1c4067;
+  --accent: #00ffbb;
 }
 
-*{ box-sizing:border-box }
-html{ scroll-behavior:smooth }
-body{
-  margin:0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  background:var(--bg);
-  color:var(--text);
+/* =========================
+     Base & typography
+     ========================= */
+* {
+  box-sizing: border-box;
 }
 
-/* ========== Layout ========== */
-.sidebar{
-  position:fixed;
-  inset:0 auto 0 0;
-  width:240px;
-  background:var(--surface);
-  border-right:1px solid #0003;
-  display:flex;
-  flex-direction:column;
-  gap:.5rem;
-  padding:1rem
-}
-.logo{
-  font-weight:800;
-  text-decoration:none;
-  color:var(--text);
-  font-size:1.25rem
-}
-.sidebar nav{ display:grid; gap:.35rem }
-.sidebar a{
-  padding:.5rem .6rem;
-  border-radius:.6rem;
-  text-decoration:none;
-  color:var(--text)
-}
-.sidebar a:hover,
-.sidebar a[aria-current="page"]{ background:linear-gradient(90deg, #0000, #0002) }
-.btn{
-  margin-top:auto;
-  padding:.6rem .8rem;
-  border:none;
-  border-radius:.8rem;
-  background:var(--primary);
-  color:var(--text);
-  cursor:pointer
-}
-.btn:focus{ outline:3px solid var(--accent); outline-offset:2px }
-
-#app{
-  margin-left:240px;
-  min-height:100dvh;
-  padding:1.25rem;
-  display:grid;
-  gap:1rem
+html {
+  scroll-behavior: smooth;
 }
 
-.card{
-  background:var(--surface);
-  border:1px solid #0003;
-  border-radius:1rem;
-  padding:1rem;
-  box-shadow:0 6px 24px #00000013
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
-.grid{ display:grid; gap:1rem }
-.grid.cols-2{ grid-template-columns:repeat(2, minmax(0,1fr)) }
-.grid.cols-3{ grid-template-columns:repeat(3, minmax(0,1fr)) }
 
-h1,h2{ margin:.2rem 0 .6rem }
-.small{ color:var(--muted); font-size:.95rem }
-.badge{
-  display:inline-block;
-  background:linear-gradient(180deg, var(--accent), #7fffe1);
-  color:#022;
-  padding:.25rem .5rem;
-  border-radius:999px;
-  font-weight:700
+a {
+  color: inherit;
+  text-decoration: none;
 }
-.progress{
-  height:10px;
-  background:#0003;
-  border-radius:999px;
-  overflow:hidden
+
+a:hover {
+  text-decoration: underline;
 }
-.progress>span{ display:block; height:100%; background:var(--accent); width:0 }
 
-/* Lesson details styling */
-details{ background:#0001; border:1px solid #0003; border-radius:.6rem; padding:.5rem .75rem; margin:.5rem 0 }
-details>summary{ cursor:pointer; font-weight:600; outline: none }
-details[open]{ background:#0002 }
-pre{ background:#0002; padding:.5rem .75rem; border-radius:.5rem; overflow:auto }
-code, pre{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+/* Better focus for keyboard users */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
 
-/* ========== Responsive ========== */
-@media (max-width: 860px){
-  .sidebar{
-    inset:auto 0 0 0;
-    height:64px;
-    width:auto;
-    flex-direction:row;
-    align-items:center;
-    gap:.75rem;
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: var(--space-2) var(--space-3);
+  background: var(--accent);
+  color: #022;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  left: var(--space-4);
+  top: var(--space-4);
+}
+
+/* =========================
+     Layout: sidebar + app
+     ========================= */
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 240px;
+  background: var(--surface);
+  border-right: 1px solid #0003;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+.sidebar nav {
+  display: grid;
+  gap: .35rem;
+}
+
+.sidebar nav a {
+  padding: .5rem .6rem;
+  border-radius: .6rem;
+  color: var(--text);
+}
+
+.sidebar nav a:hover,
+.sidebar nav a[aria-current="page"] {
+  background: linear-gradient(90deg, #0000, #0002);
+  text-decoration: none;
+}
+
+.btn {
+  margin-top: auto;
+  padding: .6rem .8rem;
+  border: none;
+  border-radius: .8rem;
+  background: var(--primary);
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* Main app container (views injected by JS) */
+#app {
+  margin-left: 240px;
+  min-height: 100dvh;
+  padding: var(--space-5);
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* =========================
+     Components
+     ========================= */
+.card {
+  background: var(--surface);
+  border: 1px solid #0003;
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  box-shadow: 0 6px 24px #00000013;
+}
+
+.small {
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.grid.cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.progress {
+  height: 10px;
+  background: #0003;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress>span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  width: 0;
+}
+
+/* Code blocks (for lesson snippets) */
+pre {
+  background: #0002;
+  padding: var(--space-3);
+  border-radius: .5rem;
+  overflow: auto;
+}
+
+code,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+/* =========================
+     Responsive
+     ========================= */
+@media (max-width: 860px) {
+  .sidebar {
+    inset: auto 0 0 0;
+    height: 64px;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-3);
   }
-  .sidebar nav{ grid-auto-flow:column; overflow:auto; white-space:nowrap }
-  #app{ margin:0; padding:1rem }
+
+  .sidebar nav {
+    grid-auto-flow: column;
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  #app {
+    margin: 0;
+    padding: var(--space-4);
+  }
+}
+
+/* =========================
+     Motion preferences
+     ========================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
